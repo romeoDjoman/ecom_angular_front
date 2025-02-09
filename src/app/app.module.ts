@@ -16,9 +16,9 @@ import { TrackOrderComponent } from './track-order/track-order.component';
 import { FooterComponent } from './shared/footer/footer.component';
 import { HeaderComponent } from './shared/header/header.component';
 import { HomeComponent } from './pages/home/home.component';
-import { BannerComponent } from './shared/banner/banner.component';
 import { TabsComponent } from './shared/tabs/tabs.component';
 import {MatTab, MatTabGroup} from "@angular/material/tabs";
+import { FeatureComponent } from './shared/feature/feature.component';
 
 @NgModule({
   declarations: [
@@ -29,8 +29,8 @@ import {MatTab, MatTabGroup} from "@angular/material/tabs";
     FooterComponent,
     HeaderComponent,
     HomeComponent,
-    BannerComponent,
-    TabsComponent
+    TabsComponent,
+    FeatureComponent
   ],
   imports: [
     MatFormFieldModule,
