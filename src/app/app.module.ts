@@ -18,6 +18,7 @@ import { HeaderComponent } from './shared/header/header.component';
 import { HomeComponent } from './pages/home/home.component';
 import { BannerComponent } from './shared/banner/banner.component';
 import { TabsComponent } from './shared/tabs/tabs.component';
+import {MatTab, MatTabGroup} from "@angular/material/tabs";
 
 @NgModule({
   declarations: [
@@ -40,7 +41,9 @@ import { TabsComponent } from './shared/tabs/tabs.component';
     DemoAngularMaterailModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    MatTabGroup,
+    MatTab
   ],
   providers: [
     provideClientHydration(),
