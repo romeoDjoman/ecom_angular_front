@@ -15,6 +15,9 @@ import { MatSelectModule } from '@angular/material/select';
 import { TrackOrderComponent } from './track-order/track-order.component';
 import { FooterComponent } from './shared/footer/footer.component';
 import { HeaderComponent } from './shared/header/header.component';
+import { HomeComponent } from './pages/home/home.component';
+import { BannerComponent } from './shared/banner/banner.component';
+import { TabsComponent } from './shared/tabs/tabs.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +26,10 @@ import { HeaderComponent } from './shared/header/header.component';
     SignupComponent,
     TrackOrderComponent,
     FooterComponent,
-    HeaderComponent
+    HeaderComponent,
+    HomeComponent,
+    BannerComponent,
+    TabsComponent
   ],
   imports: [
     MatFormFieldModule,
