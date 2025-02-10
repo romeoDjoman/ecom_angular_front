@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { response } from 'express';
 import { error } from 'console';
 import { UserStorageService } from '../services/storage/user-storage.service';
+import {faEye, faEyeSlash} from "@fortawesome/free-solid-svg-icons";
 
 @Component({
   selector: 'app-login',
@@ -50,4 +51,6 @@ export class LoginComponent {
     )
   }
 
+  protected readonly faEyeSlash = faEyeSlash;
+  protected readonly faEye = faEye;
 }
