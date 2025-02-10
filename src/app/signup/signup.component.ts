@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {Router} from '@angular/router';
@@ -10,7 +10,7 @@ import {faEye, faEyeSlash} from "@fortawesome/free-solid-svg-icons";
   templateUrl: './signup.component.html',
   styleUrl: './signup.component.css'
 })
-export class SignupComponent {
+export class SignupComponent implements OnInit {
   signupForm!: FormGroup;
   hidePassword = true;
 
@@ -22,11 +22,19 @@ export class SignupComponent {
 
   ngOnInit(): void {
     this.signupForm = this.fb.group({
-      name: [null, [Validators.required]],
+      firstName: [null, [Validators.required, Validators.minLength(2)]],
+      lastName: [null, [Validators.required, Validators.minLength(2)]],
       email: [null, [Validators.required, Validators.email]],
-      password: [null, [Validators.required]],
+      password: [
+        null,
+        [
+          Validators.required,
+          Validators.minLength(12),
+          Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[!@#\\$%\\^&\\*]).{12,}$')
+        ]
+      ],
       confirmPassword: [null, [Validators.required]]
-    })
+    });
   }
 
   togglePasswordVisibility() {
@@ -34,20 +42,28 @@ export class SignupComponent {
   }
 
   onSubmit(): void {
+    if (this.signupForm.invalid) {
+      this.snackBar.open('Veuillez corriger les erreurs dans le formulaire.', 'Fermer', {
+        duration: 5000,
+        panelClass: 'error-snackbar'
+      });
+      return;
+    }
+
     const password = this.signupForm.get('password')!.value;
     const confirmPassword = this.signupForm.get('confirmPassword')!.value;
 
     if (password != confirmPassword) {
-      this.snackBar.open('Passwords do not match.', 'Close', {duration: 5000, panelClass: 'error-snackbar'});
+      this.snackBar.open('Les mots de passe ne correspondent pas.', 'Fermer', {duration: 5000, panelClass: 'error-snackbar'});
       return;
     }
     this.authService.register(this.signupForm.value).subscribe(
       (response) => {
-        this.snackBar.open('Sign Up Successful!', 'Close', {duration: 5000});
+        this.snackBar.open('Inscription réussie !', 'Fermer', {duration: 5000});
         this.router.navigateByUrl("/login");
       },
       (error) => {
-        this.snackBar.open('Sign Up Failed. Please Try Again.', 'Close', {
+        this.snackBar.open('Échec de l\'inscription. Veuillez réessayer.', 'Fermer', {
           duration: 5000,
           panelClass: 'error-snackbar'
         });
