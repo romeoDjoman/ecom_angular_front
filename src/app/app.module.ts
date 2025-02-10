@@ -19,6 +19,8 @@ import { HomeComponent } from './pages/home/home.component';
 import { TabsComponent } from './shared/tabs/tabs.component';
 import {MatTab, MatTabGroup} from "@angular/material/tabs";
 import { FeatureComponent } from './shared/feature/feature.component';
+import { ShopComponent } from './shared/shop/shop.component';
+import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
 
 @NgModule({
   declarations: [
@@ -30,7 +32,8 @@ import { FeatureComponent } from './shared/feature/feature.component';
     HeaderComponent,
     HomeComponent,
     TabsComponent,
-    FeatureComponent
+    FeatureComponent,
+    ShopComponent
   ],
   imports: [
     MatFormFieldModule,
@@ -43,7 +46,8 @@ import { FeatureComponent } from './shared/feature/feature.component';
     ReactiveFormsModule,
     HttpClientModule,
     MatTabGroup,
-    MatTab
+    MatTab,
+    FontAwesomeModule
   ],
   providers: [
     provideClientHydration(),

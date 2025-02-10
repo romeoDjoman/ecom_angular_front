@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { Router } from '@angular/router'; 
-import { AuthService } from '../services/auth/auth.service';
+import {Component} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {Router} from '@angular/router';
+import {AuthService} from '../services/auth/auth.service';
+import {faEye, faEyeSlash} from "@fortawesome/free-solid-svg-icons";
 
 @Component({
   selector: 'app-signup',
@@ -12,11 +13,13 @@ import { AuthService } from '../services/auth/auth.service';
 export class SignupComponent {
   signupForm!: FormGroup;
   hidePassword = true;
+
   constructor(private fb: FormBuilder,
-    private snackBar: MatSnackBar,
-    private authService: AuthService,
-    private router: Router) {
+              private snackBar: MatSnackBar,
+              private authService: AuthService,
+              private router: Router) {
   }
+
   ngOnInit(): void {
     this.signupForm = this.fb.group({
       name: [null, [Validators.required]],
@@ -35,21 +38,25 @@ export class SignupComponent {
     const confirmPassword = this.signupForm.get('confirmPassword')!.value;
 
     if (password != confirmPassword) {
-      this.snackBar.open('Passwords do not match.', 'Close', { duration: 5000, panelClass: 'error-snackbar' });
+      this.snackBar.open('Passwords do not match.', 'Close', {duration: 5000, panelClass: 'error-snackbar'});
       return;
     }
     this.authService.register(this.signupForm.value).subscribe(
       (response) => {
-        this.snackBar.open('Sign Up Successful!','Close',{duration:5000});
+        this.snackBar.open('Sign Up Successful!', 'Close', {duration: 5000});
         this.router.navigateByUrl("/login");
       },
-      (error) =>{
-        this.snackBar.open('Sign Up Failed. Please Try Again.', 'Close', { duration: 5000, panelClass: 'error-snackbar' });
+      (error) => {
+        this.snackBar.open('Sign Up Failed. Please Try Again.', 'Close', {
+          duration: 5000,
+          panelClass: 'error-snackbar'
+        });
 
       }
     )
   }
 
 
-
+  protected readonly faEyeSlash = faEyeSlash;
+  protected readonly faEye = faEye;
 }
